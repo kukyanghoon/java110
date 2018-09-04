@@ -2,20 +2,22 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-
-
+        String[] names = new String[100];
+        String[] emails = new String[100];
+        String[] passwords = new String[100];
+        int index = 0;
         while(true) {
             Scanner keyIn = new Scanner(System.in);
             System.out.println("이름?");
-            String name = keyIn.nextLine();
+            names[index] = keyIn.nextLine();
 
             System.out.println("이메일?");
-            String email = keyIn.nextLine();
+            emails[index] = keyIn.nextLine();
 
             System.out.println("비밀번호?");
-            String password = keyIn.nextLine();
-
-            System.out.printf("%s,%s,%s\n", name, email, password);
+            passwords[index] = keyIn.nextLine();
+            
+            index++;
 
             System.out.println("계속입력?(Y/n)");
             String yn=keyIn.nextLine();
@@ -23,6 +25,10 @@ public class App {
             {
                 break;
             }
+            for(int i=0; i<index; i++) {
+                System.out.printf("%s, %s, %s\n", names[i], emails[i], passwords[i]);
+            }
+            keyIn.close();
         }
     }
 }
