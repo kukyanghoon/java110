@@ -43,7 +43,8 @@ public class TeacherController {
             {
                 break;
             }
-            System.out.printf("%s, %s, %s, %s, %d, [%s]\n"
+            System.out.printf("%s: %s, %s, %s, %s, %d, [%s]\n"
+                    , count-1
                     , s.getName()
                     , s.getEmail()
                     , s.getPassword()
@@ -103,6 +104,14 @@ public class TeacherController {
             {
                 inputTeachers();
             }
+            else if(command.equals("delete"))
+            {
+                deleteTeacher();
+            }
+            else if(command.equals("detail"))
+            {
+                detailTeacher();
+            }
             else if(command.equals("quit"))
             {
                 break;
@@ -112,6 +121,43 @@ public class TeacherController {
                 System.out.println("유효하지 않는 명령입니다.");
             }
         }
+    }
+    
+    private static void deleteTeacher()
+    {
+        System.out.print("삭제할 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
+
+        if(no<0 || no>teacherIndex)
+        {
+            System.out.println("유효하지않은 번호입니다.");
+            return;
+        }
+        for( int i = no; i<=teacherIndex-2; i++)
+        {
+            teachers[i]=teachers[i+1];
+        }
+        teacherIndex--;
+        System.out.println("삭제하였습니다.");
+
+    }
+
+    private static void detailTeacher() 
+    {
+        System.out.print("조회할 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
+
+        if(no<0 && no>=teacherIndex)
+        {
+            System.out.println("유효하지않은 번호입니다.");
+            return;
+        }
+        System.out.printf("이름 :%s\n", teachers[no].getName());
+        System.out.printf("이메일 :%s\n", teachers[no].getEmail());
+        System.out.printf("암호 :%s\n", teachers[no].getPassword());
+        System.out.printf("전화번호 :%s\n", teachers[no].getTel());
+        System.out.printf("급여 :%d\n", teachers[no].getPay());
+        System.out.printf("과목 :%s\n", teachers[no].getSubjects());
     }
 
 }
