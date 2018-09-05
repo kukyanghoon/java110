@@ -27,10 +27,35 @@ public class App {
             this.password = password;
         }
     }
+    static class Student extends Member{
+        protected String school;
+        protected boolean working;
+        protected String tel;
+        public String getSchool() {
+            return school;
+        }
+        public void setSchool(String school) {
+            this.school = school;
+        }
+        public boolean isWorking() {
+            return working;
+        }
+        public void setWorking(boolean working) {
+            this.working = working;
+        }
+        public String getTel() {
+            return tel;
+        }
+        public void setTel(String tel) {
+            this.tel = tel;
+        }
+        
+        
+    }
     /*static String[] names = new String[100];
     static String[] emails = new String[100];
     static String[] passwords = new String[100];*/
-    static Member[] members = new Member[100];
+    static Student []  students = new Student[100];
     static int index = 0;
     static Scanner keyIn = new Scanner(System.in);
     public static void main(String[] args) {
@@ -56,11 +81,11 @@ public class App {
                String command = keyIn.nextLine();
                if(command.equals("list"))
                {
-                   printMembers();
+                   printStudents();
                }
                else if(command.equals("add"))
                {
-                   inputMembers();
+                   inputStudents();
                }
                else if(command.equals("quit"))
                {
@@ -118,18 +143,24 @@ public class App {
             System.out.println("메뉴번호가 유효하지 않습니다.");
         }
 */    }
-    static void printMembers()
+    static void printStudents()
     {
-        for(int i=0; i<index; i++) {
-            System.out.printf("%s, %s, %s\n", members[i].getName(), members[i].getEmail(), members[i].getPassword());
+        int count =0;
+        for(Student s : students) {
+            if(count++ == index)
+            {
+                break;
+            }
+            System.out.printf("%s, %s, %s, %s, %b, %s\n", s.getName(), s.getEmail(), s.getPassword()
+                    , s.getSchool(), s.isWorking(), s.getTel());
         }
 
     }
 
-    static void inputMembers()
+    static void inputStudents()
     {
         while(true) {
-            Member m =new Member();
+            Student m =new Student();
 
             System.out.println("이름?");
             m.setName(keyIn.nextLine());
@@ -139,8 +170,17 @@ public class App {
 
             System.out.println("비밀번호?");
             m.setPassword(keyIn.nextLine());
+            
+            System.out.println("최종학력?");
+            m.setSchool(keyIn.nextLine());
+            
+            System.out.println("재직여부?(true/false)");
+            m.setWorking(Boolean.parseBoolean(keyIn.nextLine()));
+            
+            System.out.println("비밀번호?");
+            m.setTel(keyIn.nextLine());;
 
-            members[index++]=m;
+            students[index++]=m;
 
 
             System.out.println("계속입력?(Y/n)");
