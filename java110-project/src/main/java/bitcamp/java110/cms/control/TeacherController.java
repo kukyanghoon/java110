@@ -1,50 +1,24 @@
 package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
-import bitcamp.java110.cms.domain.Member;
+import bitcamp.java110.cms.dao.TeacherList;
+import bitcamp.java110.cms.domain.Teacher;
 
 public class TeacherController {
     
     public static Scanner keyIn;
     
-    public static Teacher[] teachers = new Teacher[100];
     
-    public static int teacherIndex = 0;
     
-    static class Teacher extends Member{
-        protected String tel;
-        protected int pay;
-        public String getTel() {
-            return tel;
-        }
-        public void setTel(String tel) {
-            this.tel = tel;
-        }
-        public int getPay() {
-            return pay;
-        }
-        public void setPay(int pay) {
-            this.pay = pay;
-        }
-        public String getSubjects() {
-            return subjects;
-        }
-        public void setSubjects(String subjects) {
-            this.subjects = subjects;
-        }
-        protected String subjects;
-    }
+   
     
     private static void printTeachers()
     {
-        int count =0;
-        for(Teacher s : teachers) {
-            if(count++ == teacherIndex)
-            {
-                break;
-            }
+     
+        for(int i=0; i<TeacherList.size();i++) {
+            Teacher s = TeacherList.get(i);
             System.out.printf("%s: %s, %s, %s, %s, %d, [%s]\n"
-                    , count-1
+                    , i
                     , s.getName()
                     , s.getEmail()
                     , s.getPassword()
@@ -78,7 +52,7 @@ public class TeacherController {
             System.out.println("과목?(예: 자바, C, C++ ...)");
             m.setSubjects(keyIn.nextLine());;
 
-            teachers[teacherIndex++]=m;
+            TeacherList.add(m);
 
 
             System.out.println("계속입력?(Y/n)");
@@ -128,16 +102,13 @@ public class TeacherController {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if(no<0 || no>teacherIndex)
+        if(no<0 || no>TeacherList.size())
         {
             System.out.println("유효하지않은 번호입니다.");
             return;
         }
-        for( int i = no; i<=teacherIndex-2; i++)
-        {
-            teachers[i]=teachers[i+1];
-        }
-        teacherIndex--;
+       
+        TeacherList.remove(no);
         System.out.println("삭제하였습니다.");
 
     }
@@ -146,18 +117,18 @@ public class TeacherController {
     {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
-
-        if(no<0 && no>=teacherIndex)
+        Teacher teacher = new Teacher();
+        if(no<0 && no>=TeacherList.size())
         {
             System.out.println("유효하지않은 번호입니다.");
             return;
         }
-        System.out.printf("이름 :%s\n", teachers[no].getName());
-        System.out.printf("이메일 :%s\n", teachers[no].getEmail());
-        System.out.printf("암호 :%s\n", teachers[no].getPassword());
-        System.out.printf("전화번호 :%s\n", teachers[no].getTel());
-        System.out.printf("급여 :%d\n", teachers[no].getPay());
-        System.out.printf("과목 :%s\n", teachers[no].getSubjects());
+        System.out.printf("이름 :%s\n", teacher.getName());
+        System.out.printf("이메일 :%s\n", teacher.getEmail());
+        System.out.printf("암호 :%s\n", teacher.getPassword());
+        System.out.printf("전화번호 :%s\n", teacher.getTel());
+        System.out.printf("급여 :%d\n", teacher.getPay());
+        System.out.printf("과목 :%s\n", teacher.getSubjects());
     }
 
 }
