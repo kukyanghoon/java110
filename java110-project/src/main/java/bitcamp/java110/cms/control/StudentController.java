@@ -3,11 +3,11 @@ package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
-import bitcamp.java110.cms.util.ArrayList;
+import bitcamp.java110.cms.util.LinkedList;
 
 public class StudentController {
 
-    private ArrayList<Student> students = new ArrayList<>();
+    private LinkedList<Student> students = new LinkedList<>();
     public Scanner keyIn;
     
     public StudentController(Scanner keyIn) {
@@ -16,7 +16,7 @@ public class StudentController {
     
     public void serviceStudentMenu() {
         while (true) {
-            System.out.print("학생 관리> ");
+            System.out.print("학생 관리> (목록 :list, 추가:add, 삭제:delete, 자세히:detail, 종료:quit)");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printStudents();
