@@ -1,9 +1,13 @@
 package bitcamp.java110.cms.control;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Manager;
+<<<<<<< HEAD
 import bitcamp.java110.cms.util.List;
+=======
+>>>>>>> b1
 
 public class ManagerController {
 
