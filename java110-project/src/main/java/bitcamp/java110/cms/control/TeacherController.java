@@ -1,9 +1,9 @@
 package bitcamp.java110.cms.control;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Teacher;
-import bitcamp.java110.cms.util.LinkedList;
 
 public class TeacherController {
     
