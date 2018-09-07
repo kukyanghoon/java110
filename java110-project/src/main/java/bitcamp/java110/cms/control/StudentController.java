@@ -3,17 +3,20 @@ package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
+import bitcamp.java110.cms.util.ArrayList;
 import bitcamp.java110.cms.util.List;
 
 
 public class StudentController implements Controller{
+    
+    public String name="1";
 
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
     
    
 
-    public StudentController( List<Student> students) {
-        this.students=students;
+    public StudentController(/* List<Student> students*/) {
+        /*this.students=students;*/
         init();
     }
     

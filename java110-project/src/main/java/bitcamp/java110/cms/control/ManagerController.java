@@ -3,18 +3,19 @@ package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Manager;
+import bitcamp.java110.cms.util.ArrayList;
 import bitcamp.java110.cms.util.List;
 
 
 public class ManagerController implements Controller{
 
-    private List<Manager> managers;
-   
+    private List<Manager> managers = new ArrayList<>();
+    public String name="3";
     
-    public ManagerController( List<Manager> managers) {
+   /* public ManagerController(List<Manager> managers) {
        
         this.managers=managers;
-    }
+    }*/
     
     public void service(Scanner keyIn) {
         while (true) {

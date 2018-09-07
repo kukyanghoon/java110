@@ -47,9 +47,10 @@ public class App {
         System.out.println("2. 강사관리");
         System.out.println("3. 매니저관리");
         System.out.println("0. 종료");
-        while(true)
+        System.out.print("메뉴 번호 : ");
+       /* while(true)
         {
-            System.out.print("메뉴 번호 : ");
+           
 
             String menu = keyIn.nextLine();
             switch(menu)
@@ -57,11 +58,13 @@ public class App {
             case "1":
             case "2":
             case "3":
+            case "4":
             case "0":
                 return menu;
             default:
                 System.out.println("메뉴번호가 유효하지 않습니다.");
             }
-        }
+        }*/
+        return keyIn.nextLine();
     }
 }

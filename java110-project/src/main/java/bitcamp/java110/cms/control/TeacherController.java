@@ -3,18 +3,20 @@ package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Teacher;
+import bitcamp.java110.cms.util.ArrayList;
 import bitcamp.java110.cms.util.List;
 
 public class TeacherController implements Controller{
     
   
-   
-    private List<Teacher> teachers;
+    public String name="2";
+
+    private List<Teacher> teachers = new ArrayList<>();
     
-    public TeacherController(List<Teacher> teachers) {
+    /*public TeacherController(List<Teacher> teachers) {
       
         this.teachers = teachers;
-    }
+    }*/
     
     public void service(Scanner keyIn) {
         while (true) {
