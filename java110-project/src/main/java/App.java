@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.control.Controller;
 import bitcamp.java110.cms.control.ManagerController;
 import bitcamp.java110.cms.control.StudentController;
 import bitcamp.java110.cms.control.TeacherController;
@@ -15,28 +17,30 @@ public class App {
 
     public static void main(String[] args) {
 
-        StudentController sc = new StudentController(keyIn, new LinkedList<Student>());
-        TeacherController tc = new TeacherController(keyIn, new ArrayList<Teacher>());
-        ManagerController mc = new ManagerController(keyIn, new ArrayList<Manager>());
+        HashMap<String, Controller> requestHandlerMapping =  new HashMap<>();
+        
+        requestHandlerMapping.put("1", new StudentController(new LinkedList<Student>()));
+        requestHandlerMapping.put("2",new TeacherController(new ArrayList<Teacher>()));
+        requestHandlerMapping.put("3",new ManagerController(new ArrayList<Manager>()));
         
         while(true)
         {
             String menu = promptMenu();
-            if(menu.equals("1"))
+            
+            if(menu.equals("0"))
             {
-                sc.serviceStudentMenu();
+                System.out.println("ㅅㄱ");
+                break;
             }
-            else if(menu.equals("2"))
+            
+            Controller controller = requestHandlerMapping.get(menu);
+            if(controller !=null)
             {
-                tc.serviceTeacherMenu();
-            }
-            else if(menu.equals("3"))
-            {
-                mc.serviceManagerMenu();
+                controller.service(keyIn);
             }
             else
             {
-                break;
+                System.out.println("해당 메뉴가 없습니다.");
             }
         }
         keyIn.close();
@@ -54,15 +58,6 @@ public class App {
             System.out.print("메뉴 번호 : ");
 
             String menu = keyIn.nextLine();
-            if(menu.equals("0"))
-            {
-                System.out.println("ㅅㄱ");
-            }
-            else
-            {
-                System.out.println(menu+"번 메뉴를 선택하였습니다.");
-            }
-
             switch(menu)
             {
             case "1":
