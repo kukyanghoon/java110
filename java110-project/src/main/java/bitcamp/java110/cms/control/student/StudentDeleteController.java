@@ -11,7 +11,7 @@ public class StudentDeleteController {
 
     @RequestMapping("student/delete")
     public void delete(Scanner keyIn) {
-        System.out.print("삭제할 이메일? ");
+        System.out.print("삭제할 학생의 이메일? ");
         String email = keyIn.nextLine();
 
         if(App.studentsDao.delete(email)>0)
