@@ -8,7 +8,7 @@ import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.domain.Student;
 
-@Component("student")
+@Component
 
 public class StudentController {
 
@@ -19,7 +19,7 @@ public class StudentController {
         init();
     }
     
-    @RequestMapping
+    @RequestMapping("student")
     public void student(Scanner keyIn) {
         while (true) {
             System.out.print("학생 관리> ");
