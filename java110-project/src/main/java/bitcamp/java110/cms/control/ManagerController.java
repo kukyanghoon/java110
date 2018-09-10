@@ -1,25 +1,24 @@
 package bitcamp.java110.cms.control;
 
+import java.util.ArrayList;
+
+import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.util.ArrayList;
-import bitcamp.java110.cms.util.List;
 
+@Component("3")
+public class ManagerController implements Controller { 
 
-public class ManagerController implements Controller{
-
+    //public String name = "3";
     private List<Manager> managers = new ArrayList<>();
-    public String name="3";
     
-   /* public ManagerController(List<Manager> managers) {
-       
-        this.managers=managers;
-    }*/
+    //public ManagerController() {}
     
     public void service(Scanner keyIn) {
         while (true) {
-            System.out.print("매니저 관리> (목록 :list, 추가:add, 삭제:delete, 자세히:detail, 종료:quit)\"");
+            System.out.print("매니저 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printManagers();

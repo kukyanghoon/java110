@@ -1,26 +1,22 @@
 package bitcamp.java110.cms.control;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.domain.Teacher;
-import bitcamp.java110.cms.util.ArrayList;
-import bitcamp.java110.cms.util.List;
 
-public class TeacherController implements Controller{
+// name="2"
+@Component("2")
+public class TeacherController implements Controller {
     
-  
-    public String name="2";
-
+    //public String name = "2";
     private List<Teacher> teachers = new ArrayList<>();
-    
-    /*public TeacherController(List<Teacher> teachers) {
-      
-        this.teachers = teachers;
-    }*/
     
     public void service(Scanner keyIn) {
         while (true) {
-            System.out.print("강사 관리> (목록 :list, 추가:add, 삭제:delete, 자세히:detail, 종료:quit)");
+            System.out.print("강사 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printTeachers();

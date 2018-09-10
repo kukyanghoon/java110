@@ -1,14 +1,10 @@
 package bitcamp.java110.cms.domain;
 
 public class Member {
-
-    // 여러 속성의 값을 관리하기 쉽도록 사용자 정의 데이터 타입을 만들어 사용한다.
-
     protected String name;
     protected String email;
     protected String password;
-
-    //인스턴스의 메모리를 다루는 연산자   operater=setter/getter=accesor=property=message
+    
     public String getName() {
         return name;
     }
@@ -28,4 +24,3 @@ public class Member {
         this.password = password;
     }
 }
-
