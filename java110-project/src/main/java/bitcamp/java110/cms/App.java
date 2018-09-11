@@ -4,45 +4,41 @@ import java.util.Scanner;
 import bitcamp.java110.cms.context.ApplicationContext;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
-import bitcamp.java110.cms.dao.ManagerDao;
-import bitcamp.java110.cms.dao.StudentDao;
-import bitcamp.java110.cms.dao.TeacherDao;
 
 public class App {
-    
-    public static StudentDao studentsDao = new StudentDao();
-    public static TeacherDao teachersDao = new TeacherDao();
-    public static ManagerDao managersDao = new ManagerDao();
-    
-    static Scanner keyIn = new Scanner(System.in);
 
-    public static void main(String[] args) throws Exception {
+    static Scanner keyIn =  new Scanner(System.in);
+
+    public static void main(String[] args) throws Exception{
         
         ApplicationContext iocContainer = 
-                new ApplicationContext("bitcamp.java110.cms.control");
+                new ApplicationContext("bitcamp.java110.cms");                                                              
         
-        RequestMappingHandlerMapping requestHandlerMap = 
+        
+        RequestMappingHandlerMapping requestHandlerMap =
                 new RequestMappingHandlerMapping();
         
-        // => IoC 컨테이너에 보관된 객체의 이름 목록을 가져온다.
+        //IoC 컨테이너에 보관된 객체의 이름 목록을 가져온다 
         String[] names = iocContainer.getBeanDefinitionNames();
-        for (String name : names) {
-            // => 이름으로 객체를 꺼낸다.
+        for(String name : names) {
+            // => 이름으로 객체를 꺼낸다
             Object obj = iocContainer.getBean(name);
             
-            // => 객체에서 @RequestMapping이 붙은 메서드를 찾아 저장한다.
+            // => 객체에서 @RequestMapping에 붙은 메서드를 찾아 저장한다.
             requestHandlerMap.addMapping(obj);
         }
         
-        while (true) {
-            String menu = prompt();
-            if (menu.equals("exit")){
-                System.out.println("안녕히 가세요!");
+        while(true) {
+            String menu = promptMenu();
+            if(menu.equals("exit")){
+                System.out.println("안녕히 가세요");
                 break;
-            } 
+                
+            }
             
             RequestMappingHandler mapping = requestHandlerMap.getMapping(menu);
-            if (mapping == null) {
+            
+            if(mapping == null) {
                 System.out.println("해당 메뉴가 없습니다.");
                 continue;
             }
@@ -53,30 +49,12 @@ public class App {
         keyIn.close();
     }
 
-    private static String prompt() {
-        System.out.print("메뉴> ");
+    private static String promptMenu() {
+        System.out.println("[메뉴] >");
         return keyIn.nextLine();
+        
     }
+    
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

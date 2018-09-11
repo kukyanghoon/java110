@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.domain.Student;
 
+@Component
 public class StudentDao {
     
     private List<Student> list = new ArrayList<>();
