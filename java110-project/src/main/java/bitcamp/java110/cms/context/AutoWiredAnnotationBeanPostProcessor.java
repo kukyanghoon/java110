@@ -4,8 +4,11 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 
 import bitcamp.java110.cms.annotation.Autowired;
+import bitcamp.java110.cms.annotation.Component;
 
-public class AutoWiredAnnotationBeanPostProcessor {
+
+@Component
+public class AutoWiredAnnotationBeanPostProcessor implements BeanPostProcessor{
     
     ApplicationContext beanContainer;
 
@@ -28,7 +31,7 @@ public class AutoWiredAnnotationBeanPostProcessor {
                 
                 try {
                     m.invoke(obj, dependency);
-                    System.out.printf("%s() 호출됨\n", m.getName());
+                   // System.out.printf("%s() 호출됨\n", m.getName());
                 } catch (Exception e) {}
             }
         }
