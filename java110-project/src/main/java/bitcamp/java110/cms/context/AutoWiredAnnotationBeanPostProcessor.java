@@ -7,7 +7,7 @@ import bitcamp.java110.cms.annotation.Autowired;
 import bitcamp.java110.cms.annotation.Component;
 
 @Component
-public class AutowiredAnnotationBeanPostProcessor 
+public class AutoWiredAnnotationBeanPostProcessor 
         implements BeanPostProcessor {
     
     ApplicationContext beanContainer;

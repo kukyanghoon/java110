@@ -19,7 +19,7 @@ public class ManagerAddController {
     }
     
     @RequestMapping("manager/add")
-    public void add(Scanner keyIn) {
+    public void add(Scanner keyIn) throws Exception{
         while (true) {
             Manager m = new Manager();
             
@@ -38,18 +38,8 @@ public class ManagerAddController {
             System.out.print("직위? ");
             m.setPosition(keyIn.nextLine());
             
-            int rtval =0;
-            if ((rtval =managerDao.insert(m)) > 0) {
-                System.out.println("저장하였습니다.");
-            } 
-            else if(rtval==-1)
-            {
-                System.out.println("필수 입력 항목이 비었습니다.");
-            }
-            else if(rtval==-2) {
-                
-                System.out.println("같은 이메일의 매니저가 존재합니다.");
-            }
+            managerDao.insert(m);
+       
             
             System.out.print("계속 하시겠습니까?(Y/n) ");
             String answer = keyIn.nextLine();
