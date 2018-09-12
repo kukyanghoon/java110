@@ -10,27 +10,25 @@ import bitcamp.java110.cms.domain.Student;
 
 @Component
 public class StudentDetailController {
-
+    
     StudentDao studentDao;
-
+    
     @Autowired
     public void setStudentDao(StudentDao studentDao) {
         this.studentDao = studentDao;
     }
-
+    
     @RequestMapping("student/detail")
     public void detail(Scanner keyIn) {
         System.out.print("조회할 학생의 이메일? ");
         String email = keyIn.nextLine();
-
         Student student = studentDao.findByEmail(email);
-
-        if(student == null)
-        {
-            System.out.println("해당 이메일의 학생 정보가 존재하지 않습니다.");
+        
+        if (student == null) {
+            System.out.println("해당 이메일의 학생 정보가 없습니다!");
             return;
         }
-
+        
         System.out.printf("이름: %s\n", student.getName());
         System.out.printf("이메일: %s\n", student.getEmail());
         System.out.printf("암호: %s\n", student.getPassword());

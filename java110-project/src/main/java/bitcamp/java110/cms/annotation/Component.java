@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
  * RUNTIME  : 컴파일 한 후에도 .class 파일에 남겨 둔다. 실행할 때도 참조할 수 있다.
  *            Reflection API로 클래스에서 애노테이션 정보를 추출할 수 있다.
  */
+
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME) 
 public @interface Component {

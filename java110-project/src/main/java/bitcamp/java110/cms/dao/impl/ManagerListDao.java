@@ -7,14 +7,12 @@ import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 
 //@Component
-public class ManagerListDao implements ManagerDao{
-    
+public class ManagerListDao implements ManagerDao {
     private List<Manager> list = new ArrayList<>();
-    public int insert(Manager manager)
-    {
-        for(Manager item : list)
-        {
-            if(item.getEmail().equals(manager.getEmail())) {
+    
+    public int insert(Manager manager) {
+        for (Manager item : list) {
+            if (item.getEmail().equals(manager.getEmail())) {
                 return 0;
             }
         }
@@ -22,33 +20,26 @@ public class ManagerListDao implements ManagerDao{
         return 1;
     }
     
-    public List<Manager> findAll()
-    {
+    public List<Manager> findAll() {
         return list;
     }
     
-    public Manager findByEmail(String email)
-    {
-        for(Manager item : list)
-        {
-            if(item.getEmail().equals(email)) {
+    public Manager findByEmail(String email) {
+        for (Manager item : list) {
+            if (item.getEmail().equals(email)) {
                 return item;
             }
         }
         return null;
     }
     
-    public int delete(String email)
-    {
-
-        for(Manager item : list)
-        {
-            if(item.getEmail().equals(email)) {
+    public int delete(String email) {
+        for (Manager item : list) {
+            if (item.getEmail().equals(email)) {
                 list.remove(item);
                 return 1;
             }
         }
         return 0;
-        
     }
 }

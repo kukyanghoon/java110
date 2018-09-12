@@ -15,18 +15,18 @@ import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
 @Component
 public class TeacherFile2Dao implements TeacherDao {
-    
+
     static String defaultFilename = "data/teacher2.dat";
     String filename;
     private List<Teacher> list = new ArrayList<>();
-    
+
     @SuppressWarnings("unchecked")
     public TeacherFile2Dao(String filename) 
     {
         this.filename=filename;
-        
+
         File dataFile = new File(filename);
-        
+
         try (
                 FileInputStream in0 = new FileInputStream(dataFile);
                 BufferedInputStream in1 = new BufferedInputStream(in0);
@@ -46,7 +46,7 @@ public class TeacherFile2Dao implements TeacherDao {
                 FileOutputStream out0 = new FileOutputStream(dataFile);
                 BufferedOutputStream out1 = new BufferedOutputStream(out0);
                 ObjectOutputStream out = new ObjectOutputStream(out1);
-            )
+                )
         {
             out.writeObject(list);
         } catch (Exception e) {
@@ -63,11 +63,11 @@ public class TeacherFile2Dao implements TeacherDao {
         save();
         return 1;
     }
-    
+
     public List<Teacher> findAll() {
         return list;
     }
-    
+
     public Teacher findByEmail(String email) {
         for (Teacher item : list) {
             if (item.getEmail().equals(email)) {
@@ -76,7 +76,7 @@ public class TeacherFile2Dao implements TeacherDao {
         }
         return null;
     }
-    
+
     public int delete(String email) {
         for (Teacher item : list) {
             if (item.getEmail().equals(email)) {

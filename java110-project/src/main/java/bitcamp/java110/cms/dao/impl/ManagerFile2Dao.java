@@ -16,8 +16,8 @@ import bitcamp.java110.cms.domain.Manager;
 
 @Component
 public class ManagerFile2Dao implements ManagerDao{
-    
-    
+
+
     static String defaultFilename = "data/manager2.dat";
     String filename;
     private List<Manager> list = new ArrayList<>();
@@ -26,17 +26,17 @@ public class ManagerFile2Dao implements ManagerDao{
     public ManagerFile2Dao(String filename)
     {
         this.filename=filename;
-        
+
         File dataFile = new File(filename);     
         try (
-                
-                
+
+
                 FileInputStream in0 = new FileInputStream(dataFile);
                 BufferedInputStream in1 = new BufferedInputStream(in0);
                 ObjectInputStream in = new ObjectInputStream(in1);)
         {
             list = (List<Manager>)in.readObject();
-           /* while(true) {
+            /* while(true) {
                 try {
                 Manager s = (Manager)in.readObject();
                 list.add(s);
@@ -48,14 +48,14 @@ public class ManagerFile2Dao implements ManagerDao{
         }
         catch(Exception e)
         {
-           // e.printStackTrace();
+            // e.printStackTrace();
         }
     }
     public ManagerFile2Dao() {
         this(defaultFilename);
     }
 
-    
+
     private void save() {
         File dataFile = new File(filename);     
         try (
@@ -64,12 +64,12 @@ public class ManagerFile2Dao implements ManagerDao{
                 ObjectOutputStream out = new ObjectOutputStream(out1);)
         {
             out.writeObject(list);
-           /* for(Manager s : list)
+            /* for(Manager s : list)
             {
                out.writeObject(s);
-                
+
             }*/
-         
+
         }
         catch(Exception e)
         {
@@ -78,10 +78,18 @@ public class ManagerFile2Dao implements ManagerDao{
     }
     public int insert(Manager manager)
     {
+        if(manager.getName().length()==0||manager.getEmail().length()==0||manager.getPassword().length()==0)
+        {
+            //예외처리 문법이 없던 시절에는 리턴값을 가지고 
+            //그 리턴값으로 예외 상황을 호출자에게 알렸다.
+            return -1;
+        }
         for(Manager item : list)
         {
             if(item.getEmail().equals(manager.getEmail())) {
-                return 0;
+                //예외처리 문법이 없던 시절에는 리턴값을 가지고 
+                //그 리턴값으로 예외 상황을 호출자에게 알렸다.
+                return -2;
             }
         }
         list.add(manager);

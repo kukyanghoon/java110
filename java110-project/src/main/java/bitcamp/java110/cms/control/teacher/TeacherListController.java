@@ -11,9 +11,9 @@ import bitcamp.java110.cms.domain.Teacher;
 
 @Component
 public class TeacherListController {
-
+    
     TeacherDao teacherDao;
-
+    
     @Autowired
     public void setTeacherDao(TeacherDao teacherDao) {
         this.teacherDao = teacherDao;
@@ -22,15 +22,15 @@ public class TeacherListController {
     @RequestMapping("teacher/list")
     public void list(Scanner keyIn) {
         List<Teacher> list = teacherDao.findAll();
-        for (Teacher s : list) {
-
+        
+        for (Teacher t : list) {
             System.out.printf("%s, %s, %s, %s, %d, [%s]\n",
-                    s.getName(), 
-                    s.getEmail(), 
-                    s.getPassword(), 
-                    s.getTel(),
-                    s.getPay(),
-                    s.getSubjects());
+                    t.getName(), 
+                    t.getEmail(), 
+                    t.getPassword(), 
+                    t.getTel(),
+                    t.getPay(),
+                    t.getSubjects());
         }
     }
 }

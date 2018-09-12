@@ -8,10 +8,11 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
 
-//@Component
+@Component
 public class TeacherFileDao implements TeacherDao {
     private List<Teacher> list = new ArrayList<>();
     
@@ -31,10 +32,9 @@ public class TeacherFileDao implements TeacherDao {
                 t.setEmail(values[0]);
                 t.setName(values[1]);
                 t.setPassword(values[2]);
-                t.setTel(values[3]);
-                t.setPay(Integer.parseInt(values[4]));
-                t.setSubjects(values[5]);
-                
+                t.setPay(Integer.parseInt(values[3]));
+                t.setSubjects(values[4]);
+                t.setTel(values[5]);
                 
                 list.add(t);
             }
@@ -55,10 +55,9 @@ public class TeacherFileDao implements TeacherDao {
                         t.getEmail(),
                         t.getName(),
                         t.getPassword(),
-                        t.getTel(),
                         t.getPay(),
-                        t.getSubjects())
-                        );
+                        t.getSubjects(),
+                        t.getTel()));
             }
         } catch (Exception e) {
             e.printStackTrace();

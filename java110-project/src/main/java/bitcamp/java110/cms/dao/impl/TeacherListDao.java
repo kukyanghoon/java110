@@ -7,14 +7,12 @@ import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
 
 //@Component
-public class TeacherListDao implements TeacherDao{
-    
+public class TeacherListDao implements TeacherDao {
     private List<Teacher> list = new ArrayList<>();
-    public int insert(Teacher teacher)
-    {
-        for(Teacher item : list)
-        {
-            if(item.getEmail().equals(teacher.getEmail())) {
+    
+    public int insert(Teacher teacher) {
+        for (Teacher item : list) {
+            if (item.getEmail().equals(teacher.getEmail())) {
                 return 0;
             }
         }
@@ -22,33 +20,26 @@ public class TeacherListDao implements TeacherDao{
         return 1;
     }
     
-    public List<Teacher> findAll()
-    {
+    public List<Teacher> findAll() {
         return list;
     }
     
-    public Teacher findByEmail(String email)
-    {
-        for(Teacher item : list)
-        {
-            if(item.getEmail().equals(email)) {
+    public Teacher findByEmail(String email) {
+        for (Teacher item : list) {
+            if (item.getEmail().equals(email)) {
                 return item;
             }
         }
         return null;
     }
     
-    public int delete(String email)
-    {
-
-        for(Teacher item : list)
-        {
-            if(item.getEmail().equals(email)) {
+    public int delete(String email) {
+        for (Teacher item : list) {
+            if (item.getEmail().equals(email)) {
                 list.remove(item);
                 return 1;
             }
         }
         return 0;
-        
     }
 }

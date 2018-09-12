@@ -23,8 +23,8 @@ public class StudentFile2Dao implements StudentDao{
 
     @SuppressWarnings("unchecked")
     public StudentFile2Dao(String filename) {
-       this.filename=filename;
-       File dataFile = new File(filename);
+        this.filename=filename;
+        File dataFile = new File(filename);
         try (
 
                 FileInputStream in0 = new FileInputStream(dataFile);
