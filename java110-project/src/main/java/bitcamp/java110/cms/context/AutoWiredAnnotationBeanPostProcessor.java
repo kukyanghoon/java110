@@ -31,7 +31,7 @@ public class AutoWiredAnnotationBeanPostProcessor
                 
                 try {
                     m.invoke(obj, dependency);
-                    System.out.printf("%s() 호출됨\n", m.getName());
+                   // System.out.printf("%s() 호출됨\n", m.getName());
                 } catch (Exception e) {}
             }
         }
