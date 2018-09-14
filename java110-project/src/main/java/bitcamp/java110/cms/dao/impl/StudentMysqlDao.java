@@ -13,7 +13,7 @@ import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
 
 @Component
-public class StudentJdbcDao implements StudentDao {
+public class StudentMysqlDao implements StudentDao {
 
 
     public int insert(Student student) {
@@ -220,4 +220,5 @@ public class StudentJdbcDao implements StudentDao {
 
         }
     }
+
 }
