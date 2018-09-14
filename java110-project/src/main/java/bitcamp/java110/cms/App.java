@@ -1,7 +1,6 @@
 package bitcamp.java110.cms;
 import java.util.Scanner;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
@@ -14,9 +13,6 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //Spring IoC Container사용
-        
-        
-        
         ClassPathXmlApplicationContext iocContainer = 
                 new ClassPathXmlApplicationContext("bitcamp/java110/cms/conf/application-context.xml");
 
