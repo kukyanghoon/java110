@@ -15,8 +15,14 @@ plugins {
     id 'eclipse'
 }
 
+tasks.withType(JavaCompile){
+    options.encoding = 'UTF-8'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
 // Define the main class for the application
-mainClassName = 'App'
+mainClassName = 'bitcamp.java110.cms.App'
 
 dependencies {
 compile group: 'org.springframework', name: 'spring-context', version: '5.0.9.RELEASE'
