@@ -64,12 +64,34 @@ public class ServerApp {
 
         while(true)
         {
+            Socket socket = serverSocket.accept();
+            RequestWorker worker = new RequestWorker(socket);
+            new Thread(worker).start();
+        }
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        ServerApp serverApp = new ServerApp();
+        serverApp.service();
+    }
+
+    class RequestWorker implements Runnable{
+
+        Socket socket;
+
+        public RequestWorker(Socket socket)
+        {
+            this.socket=socket;
+        }
+        @Override
+        public void run() {
+            //이 메서드에 "main"스레드에서 분리하여 독립적으로 수행할 코드를 둔다
             try (
-                    Socket socket = serverSocket.accept();
+                    Socket socket = this.socket;
                     PrintWriter out = new PrintWriter(new BufferedOutputStream(socket.getOutputStream()));
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    )
-            {
+                    ){
                 System.out.println(in.readLine());
                 out.println("OK"); out.flush();
                 while(true) {
@@ -84,13 +106,13 @@ public class ServerApp {
 
                     //요청 객체 준비
                     Request request = new Request(requestLine);
-                    
-                    
+
+
                     //응답 객체 준비
                     Response response = new Response(out);
 
                     RequestMappingHandler mapping = requestHandlerMap.getMapping(request.getAppPath());
-                    
+
                     if (mapping == null) {
                         out.println("해당 요청을 처리할 수 없습니다.");
                         out.println();
@@ -98,24 +120,22 @@ public class ServerApp {
                         continue;
                     }
                     try{
-                        
+
                         //요청 핸들러 호출
                         mapping.getMethod().invoke(mapping.getInstance(), request, response);
                     }catch(Exception e)
                     {
                         e.printStackTrace();
                         out.println("요청 처리중에 오류가 발생했습니다.");
-                        
+
                     }
-                    
+
                     out.println();
                     out.flush();
                 }
-            }
-        }
-    }
-    public static void main(String[] args) throws Exception {
-        ServerApp serverApp = new ServerApp();
-        serverApp.service();
-    }
-}
+
+            }catch(Exception e) {System.out.println(e.getMessage());}
+
+        }//run()
+    }//ReuqestWorker
+}//class
