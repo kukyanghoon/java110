@@ -12,26 +12,23 @@ public class ClientApp {
 
     public static void main(String[] args) throws Exception {
 
-        try (
-                //서버에 연결하기
-                Socket socket = new Socket("192.168.0.56",8888);
+        while (true) {
+            //사용자로부터 명령어를 입력받는다
+            String requestLine = prompt();
+            if (requestLine.equals("exit")){
+                break;
+            } 
 
-                //서버에 데이터를 보내고 읽을 때 도구를 준비하기
-                PrintStream out = new PrintStream(new BufferedOutputStream(socket.getOutputStream()));
-
-
-                //InputStreamReader in2 = new InputStreamReader;//bytestream을 characterstream으로
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                ){
-            out.println("HELLO");out.flush();
-            System.out.println(in.readLine());
-            
-
-            while (true) {
-
-                String requestLine = prompt();
+            try (
+                    Socket socket = new Socket("localhost",8888);
+                    PrintStream out = new PrintStream(new BufferedOutputStream(socket.getOutputStream()));
+                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    ){
+                //입력받은 명령어를 서버에 보낸다.
                 out.println(requestLine); out.flush();
 
+
+                //서버가 응답한 내용을 받아서 출력한다.
                 while(true) {
                     String responseLine = in.readLine();
                     System.out.println(responseLine);
@@ -40,14 +37,9 @@ public class ClientApp {
                         break;
                     }
                 }
-
-                if (requestLine.equals("exit")){
-                    System.out.println("Good-Bye");
-                    break;
-                } 
-
+            }catch(Exception e) {
+                e.printStackTrace();
             }
-          
         }
         keyIn.close();
     }
