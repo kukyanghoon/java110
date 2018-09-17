@@ -1,6 +1,6 @@
 package bitcamp.java110.cms.control.student;
 
-import java.util.Scanner;
+import java.io.PrintWriter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
+import bitcamp.java110.cms.server.Request;
+import bitcamp.java110.cms.server.Response;
 
 @Component
 public class StudentAddController {
@@ -20,35 +22,19 @@ public class StudentAddController {
     }
 
     @RequestMapping("student/add")
-    public void add(Scanner keyIn) throws Exception{
-        while (true) {
-            Student m = new Student();
-            
-            System.out.print("이름? ");
-            m.setName(keyIn.nextLine());
-            
-            System.out.print("이메일? ");
-            m.setEmail(keyIn.nextLine());
-            
-            System.out.print("암호? ");
-            m.setPassword(keyIn.nextLine());
-            
-            System.out.print("최종학력? ");
-            m.setSchool(keyIn.nextLine());
-            
-            System.out.print("재직여부?(true/false) ");
-            m.setWorking(Boolean.parseBoolean(keyIn.nextLine()));
-            
-            System.out.print("전화? ");
-            m.setTel(keyIn.nextLine());
-            
-           studentDao.insert(m);
-         
-            
-            System.out.print("계속 하시겠습니까?(Y/n) ");
-            String answer = keyIn.nextLine();
-            if (answer.toLowerCase().equals("n"))
-                break;
-        }
+    public void add(Request request, Response response){
+        Student s = new Student();
+        s.setName(request.getParameter("name"));
+        s.setEmail(request.getParameter("email"));
+        s.setPassword(request.getParameter("password"));
+        s.setTel(request.getParameter("tel"));
+        s.setSchool(request.getParameter("school"));
+        s.setWorking(Boolean.parseBoolean(request.getParameter("working")));
+        
+        
+        studentDao.insert(s);
+        PrintWriter out = response.getWriter();
+        out.println("등록되었습니다.");
+       
     }
 }
