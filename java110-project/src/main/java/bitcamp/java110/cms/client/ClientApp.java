@@ -20,7 +20,7 @@ public class ClientApp {
             } 
 
             try (
-                    Socket socket = new Socket("localhost",8888);
+                    Socket socket = new Socket("192.168.0.2",8888);
                     PrintStream out = new PrintStream(new BufferedOutputStream(socket.getOutputStream()));
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     ){
@@ -49,25 +49,3 @@ public class ClientApp {
         return keyIn.nextLine();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
