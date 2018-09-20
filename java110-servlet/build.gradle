@@ -13,9 +13,7 @@ dependencies {
 
     //서블릿 라이브러리
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
-
     compile 'com.google.guava:guava:23.0'
-    
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }

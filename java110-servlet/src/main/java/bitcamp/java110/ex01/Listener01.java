@@ -18,7 +18,7 @@ import javax.servlet.annotation.WebListener;
  * 리스너를 만들었으면 서블릿 컨테이너에 등록해야 한다.
  */
 
-@WebListener
+//@WebListener
 public class Listener01 implements ServletContextListener{
     public Listener01() {
         System.out.println("Listener01() 호출됨.");
