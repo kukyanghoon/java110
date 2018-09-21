@@ -1,5 +1,5 @@
 /*
- * 클라이언트가 보낸 데이터 읽기 - POST 요청으로 보낸 데이터
+ * 클라이언트가 보낸 데이터 읽기 - 멀티파트 데이터 읽기
  */
 package bitcamp.java110.ex04;
 
@@ -61,19 +61,19 @@ public class Servlet03 extends GenericServlet{
                 } else { // 파일
                     //기존에 들어가있던 파일과 이름이 같아버리면 덮어써버린다.
                     String filename = UUID.randomUUID().toString();
-                    
+
                     parts.put(item.getFieldName(),//파라미터명
                             filename);//저장할 때 사용한 파일명
-                    
-                    
-                            
+
+
+
                     String path = this.getServletContext()
                             .getRealPath("/upload/" + filename);
-                    
+
                     item.write(new File(path));
                 }
             }
-            
+
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -84,6 +84,50 @@ public class Servlet03 extends GenericServlet{
         out.printf("working=%b\n", Boolean.parseBoolean(parts.get("working")));
         out.printf("file1=%s\n", parts.get("file1"));
         out.printf("file2=%s\n", parts.get("file2"));
+    }
+}    
 
-    }    
-}
+
+/* 멀티파트
+ *POST /ex04/servlet03 HTTP/1.1
+Host: localhost:8888
+Content-Length: 131874
+Pragma: no-cache
+Cache-Control: no-cache
+Origin: http://localhost:8888
+Upgrade-Insecure-Requests: 1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywfOWApAAAEdebqRZ
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,;q=0.8
+Referer: http://localhost:8888/ex04/file.html
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+Connection: keep-alive
+
+------WebKitFormBoundarywfOWApAAAEdebqRZ
+Content-Disposition: form-data; name="name"
+
+킹갓슬레이브DoubleJ
+------WebKitFormBoundarywfOWApAAAEdebqRZ
+Content-Disposition: form-data; name="age"
+
+26
+------WebKitFormBoundarywfOWApAAAEdebqRZ
+Content-Disposition: form-data; name="working"
+
+false
+------WebKitFormBoundarywfOWApAAAEdebqRZ
+Content-Disposition: form-data; name="file1"; filename="pick3.png"
+Content-Type: image/png
+
+png
+
+------WebKitFormBoundarywfOWApAAAEdebqRZ
+Content-Disposition: form-data; name="file2"; filename="pick1.jpg"
+Content-Type: image/jpeg
+jpen
+->
+
+
+
+ */
