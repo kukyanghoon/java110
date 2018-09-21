@@ -20,8 +20,8 @@ public class Servlet01 extends GenericServlet{
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
 
-
-        /* GET 요청으로 갑승ㄹ 서버에 전달하는 방법
+        
+        /* GET 요청으로 값을 서버에 전달하는 방법
          * http://localhost:8888/ex04/servlet01?name=aaa&age=10&working=true
          */
         String name = req.getParameter("name");
