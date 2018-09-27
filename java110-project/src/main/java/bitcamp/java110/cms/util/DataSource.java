@@ -3,11 +3,9 @@ package bitcamp.java110.cms.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import org.springframework.stereotype.Component;
 
 
-
-@Component
+//@Component
 public class DataSource {
     Connection con;
     
