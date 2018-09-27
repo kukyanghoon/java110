@@ -9,24 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java110.cms.dao.impl.ManagerMysqlDao;
+import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.util.DataSource;
 
 @WebServlet("/manager/detail")
 public class ManagerDetailServlet extends HttpServlet{ 
 
   
     private static final long serialVersionUID = 1L;
-    ManagerMysqlDao managerDao;
-    
-   
-    @Override
-    public void init() throws ServletException {
-        DataSource dataSource = new DataSource();
-        managerDao = new ManagerMysqlDao();
-        managerDao.setDataSource(dataSource);
-    }
 
 
     @Override
@@ -35,6 +25,8 @@ public class ManagerDetailServlet extends HttpServlet{
         
         response.setContentType("text/plain;charset=UTF-8");
         int no = Integer.parseInt(request.getParameter("no"));
+        ManagerDao managerDao = 
+                (ManagerDao)this.getServletContext().getAttribute("managerDao");
         Manager m = managerDao.findByNo(no);
         PrintWriter out = response.getWriter();
         if (m == null) {
