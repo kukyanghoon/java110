@@ -1,7 +1,6 @@
 package bitcamp.java110.cms.servlet.student;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,22 +39,10 @@ public class StudentAddServlet extends HttpServlet{
             studentDao.insert(s);  
             response.sendRedirect("list");            
         } catch (Exception e) {
-            e.printStackTrace();
-            response.setHeader("Refresh", "1;url=list");
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.println("<title>매니져관리</title>");
-            out.println("</style>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>학생 등록 결과<h1>");
-            out.println("<p>wait</p>");
-            out.println("</body>");
-            out.println("</html>");
+            request.setAttribute("error", e);
+            request.setAttribute("message", "학생 등록 오류!");
+            request.setAttribute("refresh", "3;url=list");
+            request.getRequestDispatcher("/error").forward(request, response);
         }
 
     }
