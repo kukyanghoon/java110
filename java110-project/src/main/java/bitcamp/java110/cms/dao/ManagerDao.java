@@ -9,6 +9,6 @@ public interface ManagerDao {
     List<Manager> findAll();
     Manager findByEmail(String email);
     Manager findByNo(int no);
-    int deleteByNo(int no);
-    
+    int delete(int no);
+    Manager findByEmailPassword(String email, String password);
 }

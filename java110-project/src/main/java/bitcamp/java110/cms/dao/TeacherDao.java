@@ -9,6 +9,6 @@ public interface TeacherDao {
     List<Teacher> findAll();
     Teacher findByEmail(String email);
     Teacher findByNo(int no);
-    int deleteByNo(int no);
-   
+    int delete(int no);
+    Teacher findByEmailPassword(String email, String password);
 }
