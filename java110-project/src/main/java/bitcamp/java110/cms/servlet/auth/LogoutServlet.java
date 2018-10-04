@@ -18,9 +18,10 @@ public class LogoutServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) 
                     throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
         
-        //현재 세션 객체를 무효화시킨다.
+        // 현재 세션 객체를 무효화시킨다.
         session.invalidate();
         
         response.sendRedirect("login");

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>매니저 관리</title>
+<title>학생 관리</title>
 <link rel='stylesheet' href='../css/common.css'>
 <style>
 th {
@@ -18,7 +18,7 @@ th {
 
 <jsp:include page="../header.jsp"></jsp:include>
 
-<h1>매니저 등록(MVC)</h1>
+<h1>학생 등록(MVC)</h1>
 
 <form action='add' method='post'>
 <table>
@@ -40,8 +40,15 @@ th {
     <td><input type="tel" name='tel'></td>
 </tr>
 <tr>
-    <th>직위</th>
-    <td><input type='text' name='position'></td>
+    <th>최종학교</th>
+    <td><input type='text' name='school'></td>
+</tr>
+<tr>
+    <th>재직여부</th>
+    <td><select name='working'>
+        <option value='false'>미취업</option>
+        <option value='true'>재직중</option>
+    </select></td>
 </tr>
 <tr>
     <th></th>
@@ -55,6 +62,11 @@ th {
 
 </body>
 </html>
+
+
+
+
+
 
 
 

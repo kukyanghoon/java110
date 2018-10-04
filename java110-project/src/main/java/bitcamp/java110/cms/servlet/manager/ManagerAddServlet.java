@@ -15,15 +15,21 @@ import bitcamp.java110.cms.domain.Manager;
 @WebServlet("/manager/add")
 public class ManagerAddServlet extends HttpServlet { 
     private static final long serialVersionUID = 1L;
+    
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(
+            HttpServletRequest request, 
+            HttpServletResponse response) 
+                    throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        // 만약 get 요청이 들어온다면 form.jsp인클루딩
-        RequestDispatcher rd = request.getRequestDispatcher("/manager/form.jsp");
-        rd.include(request, response);
         
+        // form.jsp 인클루딩
+        RequestDispatcher rd = request.getRequestDispatcher(
+                "/manager/form.jsp");
+        rd.include(request, response);
     }
+    
     @Override
     protected void doPost(
             HttpServletRequest request, 
