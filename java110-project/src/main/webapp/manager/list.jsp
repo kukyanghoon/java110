@@ -1,7 +1,6 @@
-<%@page import="bitcamp.java110.cms.domain.Manager"%>
-<%@page import="bitcamp.java110.cms.dao.ManagerDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,31 +31,14 @@ table, th, td {
 			</tr>
 		</thead>
 		<tbody>
-
-			<jsp:useBean scope="request" id="list" class="java.util.ArrayList"
-				type="java.util.List<bitcamp.java110.cms.domain.Manager>" />
-
-			<%
-/* 위으 jsp:useBean은 다음 자바코드로 변환된다. 
-//List<Manager> list = (List<Manager>) request.getAttribute("list");
-java.util.List<Manager> list = (java.util.List<Manager>)request.getAttribute("list");
-if(list==null){
-    list = new java.util.ArrayList();
-    request.setAttribute("list", list);
-} */
-for (Manager m : list) {
-    pageContext.setAttribute("m", m);
-%>
+<c:forEach items="${list}" var="m">
 			<tr>
 				<td>${m.no}</td>
 				<td><a href='detail?no=${m.no}'>${m.name}</a></td>
 				<td>${m.email}</td>
 				<td>${m.position}</td>
 			</tr>
-			<%
-}
-%>
-
+</c:forEach>
 		</tbody>
 	</table>
 
