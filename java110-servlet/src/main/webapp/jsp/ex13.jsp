@@ -20,5 +20,6 @@
 	<p>이름 : <%=m1.getName() %>, ${m1.name}</p>
 	<p>이메일 : <%=m1.getEmail() %>, ${m1.email}</p>
 	<p>전화 : <%=m1.getTel()%>, ${m1.tel}</p>
+	<p>reset</p>
 </body>
 </html>

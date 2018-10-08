@@ -21,32 +21,30 @@ public class Servlet23 extends HttpServlet {
             HttpServletResponse response) 
                     throws ServletException, IOException {
         
-        /* 세션 타임아웃
-         * => 서블릿 컨테이너의 설정 파일에서 세션 타임아웃 시간을 설정하기
-         *    예) 톰캣 서버인경우, 
-         *    (web.xml)
-         *    
-         * => 각각의 세션 객체에 대해 타임아웃을 설정할 수 있다. 
-         *    예)session.setMaxIncativeInterval(x); (x는 초)로 설정할 있다.
-         */
+        // 세션 타임 아웃
+        // => 서블릿 컨테이너의 설정 파일에서 세션 타임아웃 시간을 설정할 수 있다.
+        //    예) web.xml 파일
+        //    <session-config>
+        //        <session-timeout>1</session-timeout>
+        //    </session-config>    
+        // 
+        // => 각각의 세션 객체에 대해 타임아웃을 설정할 수 있다.
+        //    예) session.setMaxInactiveInterval(초);
+        //
         HttpSession session = request.getSession();
         
-        /* 다음과 같이 세션에 대해 타임아웃을 설정할 수 있다.
-         * => 10초 사이에 다시 요청이 들어오지 않으면
-         *    해당 세션은 무효하다.
-         */
-        //session.setMaxInactiveInterval(10); //초단위
+        // 다음과 같이 세션에 대해 타임아웃을 설정할 수 있다.
+        // => 10초 사이에 다시 요청이 들어오지 않으면 
+        //    해당 세션은 무효화된다.
+        //session.setMaxInactiveInterval(10); // 단위는 초(seconds).
         
-        //세션에 데이터 보관하기
+        // 세션에 데이터 보관하기
         session.setAttribute("name", "임꺽정");
+       
+        // 테스트: 
+        // => 이 서블릿을 실행한 후 10초 이전에 /ex11/servlet22 실행하기
+        // => 그리고 다시 10초가 지난 후에 /ex11/server22 실행하기
         
-        /* 테스트:
-         * => 이 서블릿을 실행한 후 30초 이전에 /ex11/servlet22 실행하기
-         * => 그리고 다시 30초가 지난후에 /ex11/sevlet22실행하기
-         */
-        
-        // 세션에 보관된 데이터 보관하기
-        String name = (String) session.getAttribute("name");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -58,7 +56,6 @@ public class Servlet23 extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>세션에 데이터 보관하기 - 타임아웃 설정</h1>");
-        out.printf("name=%s<br>\n", name);
         out.println("</body>");
         out.println("</html>");
     }
