@@ -1,4 +1,4 @@
-package bitcamp.java110.cms.dao;
+package bitcamp.java110.cms.service;
 
 import bitcamp.java110.cms.domain.Member;
 

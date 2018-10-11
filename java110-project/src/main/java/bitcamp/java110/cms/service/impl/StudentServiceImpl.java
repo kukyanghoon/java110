@@ -7,6 +7,7 @@ import bitcamp.java110.cms.dao.PhotoDao;
 import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.service.StudentService;
+import bitcamp.java110.cms.util.TransactionManager;
 
 public class StudentServiceImpl implements StudentService {
 
@@ -29,7 +30,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void add(Student student) {
         // 매니저 등록관 관련된 업무는 Service 객체에서 처리한다.
+        TransactionManager txManager = TransactionManager.getInstance();
         try {
+            txManager.startTransaction();
             memberDao.insert(student);
             studentDao.insert(student);
             
@@ -37,6 +40,9 @@ public class StudentServiceImpl implements StudentService {
                 photoDao.insert(student.getNo(), student.getPhoto());
             }
         } catch (Exception e) {
+            try {
+                txManager.rollback();
+            }catch(Exception e2) {}
             throw new RuntimeException(e);
         }
     }
@@ -53,14 +59,23 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void delete(int no) {
-        if(studentDao.delete(no) == 0)
-        {
-            throw new RuntimeException();
+        TransactionManager txManager = TransactionManager.getInstance();
+        try{
+            if(studentDao.delete(no) == 0)
+
+            {
+                throw new RuntimeException();
+            }
+            photoDao.delete(no);
+            memberDao.delete(no);
+            
+            txManager.commit();
+        }catch(Exception e) {
+            try {
+                txManager.rollback();
+            }catch(Exception e2) {}
+            throw new RuntimeException(e);
         }
-        photoDao.delete(no);
-        memberDao.delete(no);
-        
-        
     }
 }
 

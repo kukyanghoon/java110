@@ -1,10 +1,10 @@
 package bitcamp.java110.cms.service.impl;
 
-import bitcamp.java110.cms.dao.AuthService;
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Member;
+import bitcamp.java110.cms.service.AuthService;
 
 public class AuthServiceImpl implements AuthService{
 
