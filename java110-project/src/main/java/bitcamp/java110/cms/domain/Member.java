@@ -49,5 +49,4 @@ public class Member implements Serializable {
         this.photo = photo;
     }
     
-    
 }

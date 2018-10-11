@@ -9,32 +9,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
+import bitcamp.java110.cms.service.TeacherService;
 
 @WebServlet("/teacher/detail")
-public class TeacherDetailServlet extends HttpServlet {
+public class TeacherDetailServlet extends HttpServlet{
+
     private static final long serialVersionUID = 1L;
-    
+
     @Override
     protected void doGet(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
-            throws ServletException, IOException {
-
+            HttpServletRequest request,
+            HttpServletResponse response)
+                    throws ServletException, IOException  {
         int no = Integer.parseInt(request.getParameter("no"));
-        
-        TeacherDao teacherDao = (TeacherDao)this.getServletContext()
-                .getAttribute("teacherDao");
-        
-        Teacher t = teacherDao.findByNo(no);
+
+        TeacherService teacherService = (TeacherService)this.getServletContext()
+                .getAttribute("teacherService");
+        Teacher t = teacherService.get(no);
+
         request.setAttribute("teacher", t);
         
         response.setContentType("text/html;charset=UTF-8");
-
-        RequestDispatcher rd = request.getRequestDispatcher(
-                "/teacher/detail.jsp");
+                
+        RequestDispatcher rd = request.getRequestDispatcher("/teacher/detail.jsp");
         rd.include(request, response);
+        
     }
-
 }

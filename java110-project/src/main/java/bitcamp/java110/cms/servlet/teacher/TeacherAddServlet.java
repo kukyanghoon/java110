@@ -12,68 +12,63 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
-
+import bitcamp.java110.cms.service.TeacherService;
 
 @MultipartConfig(maxFileSize=2_000_000)
 @WebServlet("/teacher/add")
 public class TeacherAddServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Override
     protected void doGet(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
+            HttpServletRequest request
+            , HttpServletResponse response)
                     throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
         
-        // form.jsp 인클루딩
-        RequestDispatcher rd = request.getRequestDispatcher(
-                "/teacher/form.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/teacher/form.jsp");
         rd.include(request, response);
     }
     
     @Override
     protected void doPost(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
-            throws ServletException, IOException {
-        
+            HttpServletRequest request,
+            HttpServletResponse response)
+                    throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
         Teacher t = new Teacher();
         t.setName(request.getParameter("name"));
         t.setEmail(request.getParameter("email"));
-        t.setPassword(request.getParameter("password"));
         t.setTel(request.getParameter("tel"));
+        t.setPassword(request.getParameter("password"));
         t.setPay(Integer.parseInt(request.getParameter("pay")));
         t.setSubjects(request.getParameter("subjects"));
+
+
+        TeacherService teacherService = (TeacherService)this.getServletContext()
+                .getAttribute("teacherService");
         
-        TeacherDao teacherDao = (TeacherDao)this.getServletContext()
-                .getAttribute("teacherDao");
-        
-        try {
+        try{
             Part part = request.getPart("file1");
-            if (part.getSize() > 0) {
+            if(part.getSize()>0) {
                 String filename = UUID.randomUUID().toString();
-                part.write(this.getServletContext()
-                           .getRealPath("/upload/" + filename));
+                part.write(this.getServletContext().
+                        getRealPath("upload/" + filename));
                 t.setPhoto(filename);
             }
             
-            teacherDao.insert(t);
+            teacherService.add(t);  
             response.sendRedirect("list");
-            
-        } catch(Exception e) {
+        } catch (Exception e) {
             request.setAttribute("error", e);
-            request.setAttribute("message", "강사 등록 오류!");
+            request.setAttribute("message", "선생 삭제 오류!");
             request.setAttribute("refresh", "3;url=list");
-            
+
             request.getRequestDispatcher("/error").forward(request, response);
         }
-        
     }
-
 }

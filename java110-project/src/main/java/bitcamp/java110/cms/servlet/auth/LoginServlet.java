@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bitcamp.java110.cms.dao.ManagerDao;
-import bitcamp.java110.cms.dao.StudentDao;
-import bitcamp.java110.cms.dao.TeacherDao;
+import bitcamp.java110.cms.dao.AuthService;
 import bitcamp.java110.cms.domain.Member;
 
 @WebServlet("/auth/login")
@@ -26,7 +24,6 @@ public class LoginServlet extends HttpServlet {
             HttpServletResponse response) 
                     throws ServletException, IOException {
         
-        // 쿠키 데이터에 email 이 있다면 꺼낸다.
         response.setContentType("text/html;charset=UTF-8");
         
         // form.jsp 인클루딩
@@ -57,23 +54,10 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(cookie);
         }
         
-        Member loginUser = null;
+        AuthService authService = (AuthService)this.getServletContext().getAttribute("authService");
         
-        if (type.equals("manager")) {
-            ManagerDao managerDao = (ManagerDao)this.getServletContext()
-                    .getAttribute("managerDao");
-            loginUser = managerDao.findByEmailPassword(email, password);
-            
-        } else if (type.equals("student")) {
-            StudentDao studentDao = (StudentDao)this.getServletContext()
-                    .getAttribute("studentDao");
-            loginUser = studentDao.findByEmailPassword(email, password);
-            
-        } else if (type.equals("teacher")) {
-            TeacherDao teacherDao = (TeacherDao)this.getServletContext()
-                    .getAttribute("teacherDao");
-            loginUser = teacherDao.findByEmailPassword(email, password);
-        }
+        Member loginUser = authService.getMember(email, password, type);
+       
         
         HttpSession session = request.getSession();
         if (loginUser != null) {
