@@ -62,7 +62,7 @@ public class StudentAddServlet extends HttpServlet {
                            .getRealPath("/upload/" + filename));
                 s.setPhoto(filename);
             }
-
+            
             studentService.add(s);
             response.sendRedirect("list");
             

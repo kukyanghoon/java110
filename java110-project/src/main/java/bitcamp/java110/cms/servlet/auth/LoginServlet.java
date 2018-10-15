@@ -54,10 +54,11 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(cookie);
         }
         
-        AuthService authService = (AuthService)this.getServletContext().getAttribute("authService");
+        AuthService authService = 
+                (AuthService)this.getServletContext()
+                                 .getAttribute("authService");
         
         Member loginUser = authService.getMember(email, password, type);
-       
         
         HttpSession session = request.getSession();
         if (loginUser != null) {

@@ -14,23 +14,22 @@ import bitcamp.java110.cms.util.DataSource;
 public class ManagerMysqlDao implements ManagerDao {
     
     DataSource dataSource;
- 
     
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public int insert(Manager manager) throws DaoException {
-        
         Connection con = null;
         PreparedStatement stmt = null;
+        
+        
         try {
             con = dataSource.getConnection();
             String sql = "insert into p1_mgr(mrno,posi) values(?,?)";
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, manager.getNo());
-            stmt.setString(2,  manager.getPosition());
-            
+            stmt.setString(2, manager.getPosition());
             return stmt.executeUpdate();
             
         } catch (Exception e) {
@@ -52,7 +51,7 @@ public class ManagerMysqlDao implements ManagerDao {
         
         try {
             con = dataSource.getConnection();
-            String sql =   "select" + 
+            String sql = "select" + 
                     " m.mno," +
                     " m.name," + 
                     " m.email," + 
@@ -61,6 +60,7 @@ public class ManagerMysqlDao implements ManagerDao {
                     " inner join p1_memb m on mr.mrno = m.mno";
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
+            
             while (rs.next()) {
                 Manager mgr = new Manager();
                 mgr.setNo(rs.getInt("mno"));
@@ -88,13 +88,13 @@ public class ManagerMysqlDao implements ManagerDao {
         
         try {
             con = dataSource.getConnection();
-            String sql =   "select" + 
+            String sql = "select" + 
                     " m.mno," +
                     " m.name," + 
                     " m.email," + 
                     " m.tel," + 
                     " mr.posi," +
-                    " mp.filepath" +
+                    " mp.photo" +
                     " from p1_mgr mr" + 
                     " inner join p1_memb m on mr.mrno = m.mno" +
                     " left outer join p1_memb_phot mp on mr.mrno = mp.mno" +
@@ -110,7 +110,7 @@ public class ManagerMysqlDao implements ManagerDao {
                 mgr.setName(rs.getString("name"));
                 mgr.setTel(rs.getString("tel"));
                 mgr.setPosition(rs.getString("posi"));
-                mgr.setPhoto(rs.getString("filepath"));
+                mgr.setPhoto(rs.getString("photo"));
                 
                 return mgr;
             }
@@ -139,7 +139,7 @@ public class ManagerMysqlDao implements ManagerDao {
                     " m.email," + 
                     " m.tel," + 
                     " mr.posi," +
-                    " mp.filepath" +
+                    " mp.photo" +
                     " from p1_mgr mr" + 
                     " inner join p1_memb m on mr.mrno = m.mno" +
                     " left outer join p1_memb_phot mp on mr.mrno = mp.mno" +
@@ -155,7 +155,7 @@ public class ManagerMysqlDao implements ManagerDao {
                 mgr.setName(rs.getString("name"));
                 mgr.setTel(rs.getString("tel"));
                 mgr.setPosition(rs.getString("posi"));
-                mgr.setPhoto(rs.getString("filepath"));
+                mgr.setPhoto(rs.getString("photo"));
                 
                 return mgr;
             }
@@ -181,8 +181,10 @@ public class ManagerMysqlDao implements ManagerDao {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, no);
             return stmt.executeUpdate();
+            
         } catch (Exception e) {
             throw new DaoException(e);
+            
         } finally {
             try {stmt.close();} catch (Exception e) {}
             dataSource.returnConnection(con);
@@ -210,7 +212,6 @@ public class ManagerMysqlDao implements ManagerDao {
             stmt.setString(1, email);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
-                   
             
             if (rs.next()) {
                 Manager mgr = new Manager();
@@ -235,3 +236,27 @@ public class ManagerMysqlDao implements ManagerDao {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

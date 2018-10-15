@@ -9,7 +9,7 @@ import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.service.ManagerService;
 import bitcamp.java110.cms.util.TransactionManager;
 
-public class ManagerServiceImpl implements ManagerService{
+public class ManagerServiceImpl implements ManagerService {
 
     MemberDao memberDao;
     ManagerDao managerDao;
@@ -33,50 +33,60 @@ public class ManagerServiceImpl implements ManagerService{
         TransactionManager txManager = TransactionManager.getInstance();
         try {
             txManager.startTransaction();
+            
             memberDao.insert(manager);
             managerDao.insert(manager);
-
+            
             if (manager.getPhoto() != null) {
                 photoDao.insert(manager.getNo(), manager.getPhoto());
             }
-
+            
             txManager.commit();
+            
         } catch (Exception e) {
-            try {
-                txManager.rollback();
-            }catch(Exception e2) {}
+            try {txManager.rollback();} catch (Exception e2) {}
             throw new RuntimeException(e);
         }
     }
-
+    
     @Override
     public List<Manager> list() {
         return managerDao.findAll();
     }
-
+    
     @Override
     public Manager get(int no) {
         return managerDao.findByNo(no);
     }
-
+    
     @Override
     public void delete(int no) {
         TransactionManager txManager = TransactionManager.getInstance();
-        try{
-            if(managerDao.delete(no) == 0)
-
-            {
-                throw new RuntimeException();
+        
+        try {
+            txManager.startTransaction();
+            
+            if (managerDao.delete(no) == 0) {
+                throw new RuntimeException("해당 번호의 데이터가 없습니다.");
             }
             photoDao.delete(no);
             memberDao.delete(no);
             
             txManager.commit();
-        }catch(Exception e) {
-            try {
-                txManager.rollback();
-            }catch(Exception e2) {}
+            
+        } catch (Exception e) {
+            try {txManager.rollback();} catch (Exception e2) {}
             throw new RuntimeException(e);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+

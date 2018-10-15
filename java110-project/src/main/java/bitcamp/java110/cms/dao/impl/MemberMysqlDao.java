@@ -3,6 +3,7 @@ package bitcamp.java110.cms.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import bitcamp.java110.cms.dao.DaoException;
 import bitcamp.java110.cms.dao.MemberDao;
@@ -24,8 +25,9 @@ public class MemberMysqlDao implements MemberDao {
         
         try {
             con = dataSource.getConnection();
-            String sql = "insert into p1_memb(name,email,pwd,tel,cdt)" + "values(?,?,password(?),?,now())";
-            stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            String sql = "insert into p1_memb(name,email,pwd,tel,cdt)"
+                    + " values(?,?,password(?),?,now())";
+            stmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, member.getName());
             stmt.setString(2, member.getEmail());
             stmt.setString(3, member.getPassword());

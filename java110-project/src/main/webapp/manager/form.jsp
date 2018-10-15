@@ -51,8 +51,6 @@ th {
     <th></th>
     <td><button>등록</button></td>
 </tr>
-
-
 </tbody>
 </table>
 </form>

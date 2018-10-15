@@ -7,28 +7,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EL(Expression Language)</title>
+<title>EL</title>
 </head>
 <body>
-<h1>EL - 배열에서 값 꺼내기</h1>
-
+<h1>EL - List 객체에서 값 꺼내기</h1>
 <%
 ArrayList<String> nameList = new ArrayList<>();
 nameList.add("김구");
+nameList.add("안중근");
 nameList.add("윤봉길");
-nameList.add("김종규");
-pageContext.setAttribute("names", nameList);
 
+pageContext.setAttribute("names", nameList);
 %>
 
-<pre>
-보관소가 아닌 로컬 변수는 EL에서 사용할 수 없다.
-ex) $ { nameList[0]}
-</pre>
 ${names[0]}<br>
 ${names[1]}<br>
 ${names[2]}<br>
 ${names[3]}<br>
+
+<%-- 보관소가 아닌 로컬 변수는 EL에서 사용할 수 없다. --%>
 ${nameList[0]}<br>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -194,8 +194,8 @@ ALTER TABLE p1_lect_stud
 
 -- 회원사진
 CREATE TABLE p1_memb_phot (
-    mno      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-    filepath VARCHAR(255) NOT NULL COMMENT '사진' -- 사진
+    mno   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+    photo VARCHAR(255) NOT NULL COMMENT '사진' -- 사진
 )
 COMMENT '회원사진';
 

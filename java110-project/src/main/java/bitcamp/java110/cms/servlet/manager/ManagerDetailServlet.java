@@ -22,7 +22,7 @@ public class ManagerDetailServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) 
             throws ServletException, IOException {
-        System.out.println("dddddddddddddddddddddddddddddddd");
+        
         // JSP 페이지에서 사용할 데이터를 준비한다.
         int no = Integer.parseInt(request.getParameter("no"));
 
@@ -30,6 +30,7 @@ public class ManagerDetailServlet extends HttpServlet {
         ManagerService managerService = 
                 (ManagerService)sc.getAttribute("managerService");
         Manager m = managerService.get(no);
+        
         // JSP 페이지에서 사용할 수 있도록 ServletRequest 보관소에 저장한다.
         request.setAttribute("manager", m);
         

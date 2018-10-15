@@ -8,24 +8,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EL(Expression Language)</title>
+<title>EL</title>
 </head>
 <body>
-<h1>EL - 일반객체에서 값 꺼내기</h1>
-
+<h1>EL - 일반 객체에서 값 꺼내기</h1>
 <%
-Member memb = new Member();
-memb.setNo(100);
-memb.setName("홍길동");
-memb.setEmail("hong@test.com");
-memb.setTel("1111-2222");
+Member member = new Member();
+member.setNo(100);
+member.setName("홍길동");
+member.setEmail("hong@test.com");
+member.setTel("1111-2222");
 
-pageContext.setAttribute("memb", memb);
-
+pageContext.setAttribute("member", member);
 %>
-${memb.no}<br>
-${memb["no"]}<br>
-${memb['no']}<br>
-${memb.getNo()}<br>
+
+${member.no}<br>
+${member["no"]}<br>
+${member['no']}<br>
+${member.getNo()}<br>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

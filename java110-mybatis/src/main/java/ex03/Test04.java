@@ -28,7 +28,7 @@ public class Test04 {
         // 4) Mybatis 객체를 MemberDao에게 넘겨준다.
         memberDao.setSqlSessionFactory(sqlSessionFactory);
         
-        Member m = memberDao.findByNo(44);
+        Member m = memberDao.findByNo(84);
         
         System.out.println(m.getNo());
         System.out.println(m.getName());
@@ -39,3 +39,13 @@ public class Test04 {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
