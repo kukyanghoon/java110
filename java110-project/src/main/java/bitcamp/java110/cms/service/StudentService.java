@@ -9,4 +9,5 @@ public interface StudentService {
     List<Student> list();
     Student get(int no);
     void delete(int no);
+    List<Student> list(int pageNo, int pageSize);
 }
