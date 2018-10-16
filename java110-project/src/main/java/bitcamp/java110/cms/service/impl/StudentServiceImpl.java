@@ -3,6 +3,9 @@ package bitcamp.java110.cms.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import bitcamp.java110.cms.dao.MemberDao;
 import bitcamp.java110.cms.dao.PhotoDao;
 import bitcamp.java110.cms.dao.StudentDao;
@@ -11,79 +14,82 @@ import bitcamp.java110.cms.service.StudentService;
 
 public class StudentServiceImpl implements StudentService {
 
-    MemberDao memberDao;
-    StudentDao studentDao;
-    PhotoDao photoDao;
+    SqlSessionFactory sqlSessionFactory;
 
-    public void setMemberDao(MemberDao memberDao) {
-        this.memberDao = memberDao;
+
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
-    public void setStudentDao(StudentDao studentDao) {
-        this.studentDao = studentDao;
-    }
 
-    public void setPhotoDao(PhotoDao photoDao) {
-        this.photoDao = photoDao;
-    }
 
     @Override
     public void add(Student student) {
+        SqlSession session = sqlSessionFactory.openSession();
 
-        memberDao.insert(student);
-        studentDao.insert(student);
+        try{
+            MemberDao memberDao = session.getMapper(MemberDao.class);
+            StudentDao studentDao = session.getMapper(StudentDao.class);
+            PhotoDao photoDao = session.getMapper(PhotoDao.class);
+            memberDao.insert(student);
+            studentDao.insert(student);
 
-        if (student.getPhoto() != null) {
-            HashMap<String, Object> params = new HashMap<>();
-            params.put("no", student.getNo());
-            params.put("photo", student.getPhoto());
-            photoDao.insert(params);
+            if (student.getPhoto() != null) {
+                HashMap<String, Object> params = new HashMap<>();
+                params.put("no", student.getNo());
+                params.put("photo", student.getPhoto());
+                photoDao.insert(params);
+            }
+            session.commit();
+        }catch(Exception e)
+        {
+            session.rollback();
+        }finally
+        {
+            session.close();
         }
 
     }
 
-    
-
     @Override
     public Student get(int no) {
-        return studentDao.findByNo(no);
+        try(SqlSession session = sqlSessionFactory.openSession()){
+            StudentDao studentDao = session.getMapper(StudentDao.class);
+            return studentDao.findByNo(no);
+        }
     }
 
     @Override
     public void delete(int no) {
-
-        if (studentDao.delete(no) == 0) {
-            throw new RuntimeException("해당 번호의 데이터가 없습니다.");
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            MemberDao memberDao = session.getMapper(MemberDao.class);
+            StudentDao studentDao = session.getMapper(StudentDao.class);
+            PhotoDao photoDao = session.getMapper(PhotoDao.class);
+            if (studentDao.delete(no) == 0) {
+                throw new RuntimeException("해당 번호의 데이터가 없습니다.");
+            }
+            photoDao.delete(no);
+            memberDao.delete(no);
+        }catch(Exception e)
+        {
+            session.rollback();
+        }finally {
+            session.close();
         }
-        photoDao.delete(no);
-        memberDao.delete(no);
 
-    }
-
-    @Override
-    public List<Student> list() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
     public List<Student> list(int pageNo, int pageSize) {
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("rowNo", (pageNo-1)*pageSize);
-        params.put("size", pageSize);
-        
-        return studentDao.findAll(params);
+        try(SqlSession session = sqlSessionFactory.openSession(false)){
+
+            StudentDao studentDao = session.getMapper(StudentDao.class);
+            HashMap<String, Object> params = new HashMap<>();
+            params.put("rowNo", (pageNo-1)*pageSize);
+            params.put("size", pageSize);
+
+            return studentDao.findAll(params);
+        }
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
