@@ -1,31 +1,32 @@
-<%@ page language="java" 
+<%@ page language="java"
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSTL</title>
+<title>JSP</title>
 </head>
 <body>
 <h1>JSTL - c:if</h1>
 <pre>
 - 조건문을 만든다.
 </pre>
-
-<c:set var="name" value="홍길동"/>
+<c:set var="name" value="hong"/>
 <c:set var="age" value="16"/>
 <c:set var="gender" value="woman"/>
 
 <c:if test="${not empty name}">
-    <p>${name}님 환영합니다!
+    <p>${name}님 환영합니다!</p>
 </c:if>
-<c:if test="${age < 19}">
+
+<c:if test="${age < 19}" >
     <p>미성년입니다.</p>
 </c:if>
-<c:if test="${age >= 19}">
+
+<c:if test="${age >= 19}" >
     <p>성년입니다.</p>
 </c:if>
 
@@ -33,21 +34,10 @@
 <pre>
 var 속성으로 변수이름을 설정하면, 조건문의 테스트 결과는 지정된 이름으로 보관소에 저장된다.
 </pre>
-<c:if test="${gender == 'woman'}" var="r1"/>
-
-${pageScope.r1 ? "여성" : "남성"}<br>
+<c:if test="${gender == 'woman'}" var="r1">
+    ${r1 ? "여성" :"남성"}<br>
+</c:if>
+    
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

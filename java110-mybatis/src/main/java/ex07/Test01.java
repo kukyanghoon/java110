@@ -27,13 +27,11 @@ public class Test01 {
         
         List<Board> boards = boardDao.findAll(params);
         for (Board b : boards) {
-            
-            /* 게시물 목록 보기의 '작성자명'처럼 다른 테이블과 조인하더라도
-             * 간단한 값을 추가하여 보려줄 때는 
-             * 별도의 작성자 정보를 그냥 Board객체에 담아서 사용하면 된다.
-             * ex06과 같다.
-             */
-            
+            // 게시물 목록 보기의 '작성자명'처럼 다른 테이블과 조인하더라도 
+            // 간단한 값을 추가하여 보여줄 때는 
+            // 작성자 정보를 그냥 Board 객체에 담아서 사용하면 된다.
+            // ex06과 같다. 
+            //
             System.out.printf("%d, %s, %d, %s, %s\n", 
                     b.getNo(),
                     b.getTitle(),
@@ -42,6 +40,7 @@ public class Test01 {
                     b.getCreatedDate());
         }
     }
+
 }
 
 

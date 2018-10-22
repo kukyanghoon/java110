@@ -1,4 +1,4 @@
-// 세션 사용 전 - hidden 타입 input 필드 사용
+//세션 사용 후 - HttpSession 보관소에 데이터 저장하기 
 package bitcamp.java110.ex11;
 
 import java.io.IOException;
@@ -16,8 +16,8 @@ public class Servlet03 extends HttpServlet {
 
     @Override
     protected void doPost(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
+            HttpServletRequest request,
+            HttpServletResponse response)
                     throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
@@ -36,8 +36,8 @@ public class Servlet03 extends HttpServlet {
         out.println("<body>");
         out.println("<h1>3페이지</h1>");
         out.println("<form action='servlet04' method='post'>");
-        out.printf("<input type='hidden' name='name' value='%s'>\n", name);
-        out.printf("<input type='hidden' name='age' value='%s'>\n", age);
+        out.printf("<input type='hidden' name='name', value='%s'>\n", name);
+        out.printf("<input type='hidden' name='age', value='%s'>\n", age);
         out.println("전화: <input type='tel' name='tel'><br>");
         out.println("<button>다음</button>");
         out.println("</form>");
@@ -45,16 +45,3 @@ public class Servlet03 extends HttpServlet {
         out.println("</html>");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,14 +2,14 @@ package bitcamp.java110;
 
 import java.io.Serializable;
 
-public class Member implements Serializable {
+public class Member implements Serializable{
     private static final long serialVersionUID = 1L;
-    
-    protected int no;
     protected String name;
     protected String email;
+    //protected transient String password;
     protected String password;
     protected String tel;
+    protected int no;
     
     public int getNo() {
         return no;

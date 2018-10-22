@@ -13,4 +13,5 @@ public class Inventory2 {
     public void setMember(Member member) {
         this.myLocal.set(member);
     }
+    
 }

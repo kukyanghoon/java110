@@ -4,6 +4,7 @@ public class AttachFile {
     protected int no;
     protected String filename;
     protected int boardNo;
+    
     public int getNo() {
         return no;
     }
@@ -22,5 +23,6 @@ public class AttachFile {
     public void setBoardNo(int boardNo) {
         this.boardNo = boardNo;
     }
-
+    
+    
 }

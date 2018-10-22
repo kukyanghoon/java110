@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" 
+<%@ page language="java"
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EL</title>
+<title>JSP</title>
 </head>
 <body>
 <h1>EL - List 객체에서 값 꺼내기</h1>
@@ -17,7 +17,7 @@ nameList.add("김구");
 nameList.add("안중근");
 nameList.add("윤봉길");
 
-pageContext.setAttribute("names", nameList);
+pageContext.setAttribute("names",nameList);
 %>
 
 ${names[0]}<br>
@@ -30,15 +30,3 @@ ${nameList[0]}<br>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

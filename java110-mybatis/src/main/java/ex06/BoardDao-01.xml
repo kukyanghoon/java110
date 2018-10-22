@@ -16,9 +16,9 @@
     <result column="email" property="email"/>
     <result column="tel" property="tel"/>
   </resultMap>
-  
+
   <select id="findAll" resultMap="boardMap" parameterType="map">
-     select
+    select
       b.bno,
       b.titl, 
       b.cnt, 
@@ -26,13 +26,12 @@
       b.mno,
       m.name
     from p1_board b
-    inner join p1_memb m using (mno)
-    <!--on b.mno=m.mno 컬림 이름이 같으면 using(컬럼이름)으로 사용할 수 있다.-->
+        inner join p1_memb m using (mno)
     limit #{rowNo}, #{pageSize} 
   </select>
   
   <select id="findByNo" resultMap="boardMap" parameterType="int">
-      select
+    select
       b.bno,
       b.titl, 
       b.cont,
@@ -43,7 +42,7 @@
       m.email,
       m.tel
     from p1_board b
-    inner join p1_memb m using (mno)
+        inner join p1_memb m using (mno)
     where bno=#{value}
   </select>
   

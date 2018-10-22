@@ -1,4 +1,4 @@
-// 세션 사용 후 - HttpSession 보관소에 데이터 저장하기
+//세션 사용 후 - HttpSession 보관소에 데이터 저장하기 
 package bitcamp.java110.ex11;
 
 import java.io.IOException;
@@ -17,8 +17,8 @@ public class Servlet13 extends HttpServlet {
 
     @Override
     protected void doPost(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
+            HttpServletRequest request,
+            HttpServletResponse response)
                     throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
@@ -47,16 +47,3 @@ public class Servlet13 extends HttpServlet {
         out.println("</html>");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

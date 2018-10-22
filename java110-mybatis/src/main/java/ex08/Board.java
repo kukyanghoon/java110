@@ -11,33 +11,14 @@ public class Board {
     protected int viewCount;
     protected Date createdDate;
     protected int memberNo;
-    protected String writer; //목록에서 작성자의 이름을 출력하기 위해 필드 추가
+    protected String writer; // 목록에서 작성자의 이름을 출력하기 위해 필드 추가
     
-    //이전의 ex06 패키지와 달리 작성자 정보는 Member객체에 담는다.
+    // 이전의 ex06 패키지와 달리 작성자 정보는 Member 객체에 담는다.
     protected Member member;
     
-    //첨부파일을 담을 목록 준비
+    // 첨부파일을 담을 목록 준비
     protected List<AttachFile> attachFiles;
     
-
-    public List<AttachFile> getAttachFiles() {
-        return attachFiles;
-    }
-    public void setAttachFiles(List<AttachFile> attachFiles) {
-        this.attachFiles = attachFiles;
-    }
-    public Member getMember() {
-        return member;
-    }
-    public void setMember(Member member) {
-        this.member = member;
-    }
-    public String getWriter() {
-        return writer;
-    }
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
     public int getNo() {
         return no;
     }
@@ -73,5 +54,23 @@ public class Board {
     }
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
+    }
+    public String getWriter() {
+        return writer;
+    }
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+    public Member getMember() {
+        return member;
+    }
+    public void setMember(Member member) {
+        this.member = member;
+    }
+    public List<AttachFile> getAttachFiles() {
+        return attachFiles;
+    }
+    public void setAttachFiles(List<AttachFile> attachFiles) {
+        this.attachFiles = attachFiles;
     }
 }

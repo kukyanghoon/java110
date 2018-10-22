@@ -60,7 +60,8 @@ public class BoardDao {
     public List<AttachFile> findAttachFiles(int boardNo) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
-            return sqlSession.selectList("boarddao.findAttachFiles", boardNo);
+            return sqlSession.selectList(
+                    "boarddao.findAttachFiles", boardNo);
         } finally {
             sqlSession.close();
         }

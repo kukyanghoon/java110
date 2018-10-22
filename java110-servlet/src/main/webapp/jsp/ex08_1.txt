@@ -1,4 +1,5 @@
-<%@ page  
+<%@ page
     pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true"%>
+    trimDirectiveWhitespaces="true"
+ %>
 <p>ex08_1 내용</p>

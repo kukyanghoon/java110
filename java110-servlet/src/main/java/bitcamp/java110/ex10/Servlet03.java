@@ -1,4 +1,6 @@
-/* 쿠키(cookie) - 같은 경로의 서블릿이 쿠키를 받는 예 
+/*
+ * 쿠키(cookie) - 같은 경로의 서블릿이 쿠키를 받는 예
+ * => 
  */
 package bitcamp.java110.ex10;
 
@@ -13,21 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/ex10/a/b/servlet03")
-public class Servlet03 extends HttpServlet {
+public class Servlet03 extends HttpServlet{
+
     private static final long serialVersionUID = 1L;
 
-    
     @Override
     public void doGet(
-            HttpServletRequest req, 
-            HttpServletResponse res) 
-            throws ServletException, IOException {
+            HttpServletRequest req,
+            HttpServletResponse res)
+                    throws ServletException, IOException {
 
         Cookie[] cookies = req.getCookies();
         
         res.setContentType("text/html;charset=UTF-8");
         PrintWriter out = res.getWriter();
-        
+
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
@@ -35,49 +37,15 @@ public class Servlet03 extends HttpServlet {
         out.println("<title>ex10</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<h1>쿠키 받기2</h1>");
+        out.println("<h1>쿠키 받아먹기2</h1>");
         
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                out.printf("<p>%s=%s</p>\n", 
-                        cookie.getName(), 
-                        cookie.getValue());
+        if(cookies != null) {
+            for(Cookie cookie : cookies) {
+                out.printf("<p>%s=%s</p>\n", cookie.getName(), cookie.getValue());
             }
         }
         
         out.println("</body>");
         out.println("</html>");
-    }
+    }    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
