@@ -1,12 +1,12 @@
-package bitcamp.java110.cms;
+package bitcamp.java110.cms.web;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,12 @@ public class StudentController{
     @Autowired
     StudentService studentService;
 
+    
+    @Autowired
+    ServletContext sc;
+    
     @RequestMapping("/student/list")
-    public String list(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
+    public String list(HttpServletRequest request) 
             throws ServletException, IOException {
 
         int pageNo = 1;
@@ -51,8 +53,7 @@ public class StudentController{
 
     @RequestMapping("/student/detail")
     public String detail(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
+            HttpServletRequest request) 
                     throws Exception {
         int no = Integer.parseInt(request.getParameter("no"));
         Student s = studentService.get(no);
@@ -62,8 +63,7 @@ public class StudentController{
     
     @RequestMapping("/student/delete")
     public String delete(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
+            HttpServletRequest request) 
                     throws Exception {
 
         int no = Integer.parseInt(request.getParameter("no"));
@@ -73,8 +73,7 @@ public class StudentController{
     }
     @RequestMapping("/student/add")
     public String add(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception{ 
+            HttpServletRequest request) throws Exception{ 
 
         if(request.getMethod().equals("GET")) {
             return "/student/form.jsp";
