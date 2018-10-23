@@ -13,72 +13,70 @@ import bitcamp.java110.cms.mvc.RequestMapping;
 import bitcamp.java110.cms.service.AuthService;
 
 @Component
-public class AuthController{
+public class AuthController {
 
     @Autowired
     AuthService authService;
-
+    
     @RequestMapping("/auth/login")
     public String login(
             HttpServletRequest request, 
             HttpServletResponse response,
             HttpSession session) {
-
-        if(request.getMethod().equals("GET")) {
-            return "/auth/form.jsp"; // 서버에게 어느 JSP로 가면 되는지 알려주느것이다.!
+        
+        if (request.getMethod().equals("GET")) {
+            return  "/auth/form.jsp";
         }
-
+        
         String type = request.getParameter("type");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String save = request.getParameter("save");
-
-
+        
         if (save != null) {// 이메일 저장하기를 체크했다면,
             Cookie cookie = new Cookie("email", email);
             cookie.setMaxAge(60 * 60 * 24 * 15);
             response.addCookie(cookie);
-
+            
         } else {// 이메일을 저장하고 싶지 않다면,
             Cookie cookie = new Cookie("email", "");
             cookie.setMaxAge(0);
             response.addCookie(cookie);
         }
-
+        
         Member loginUser = authService.getMember(email, password, type);
-
-        session = request.getSession();
+        
         if (loginUser != null) {
+            // 회원 정보를 세션에 보관한다.
             session.setAttribute("loginUser", loginUser);
             String redirectUrl = null;
-
+            
             switch (type) {
             case "student":
-                redirectUrl ="../student/list";
+                redirectUrl = "../student/list";
                 break;
             case "teacher":
-                redirectUrl ="../teacher/list";
+                redirectUrl = "../teacher/list";
                 break; 
             case "manager":
-                redirectUrl ="../manager/list";
+                redirectUrl = "../manager/list";
                 break; 
             }
-            return "redirect:"+redirectUrl;
+            return "redirect:" + redirectUrl;
+            
         } else {
             session.invalidate();
             return "redirect:login";
         }
     }
-
+    
     @RequestMapping("/auth/logout")
-    public String logout(
-            HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
-
         return "redirect:login";
     }
-
 }
+
 
 
 
