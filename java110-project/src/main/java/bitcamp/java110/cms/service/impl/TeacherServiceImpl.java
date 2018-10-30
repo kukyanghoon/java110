@@ -20,7 +20,6 @@ public class TeacherServiceImpl implements TeacherService {
     @Autowired PhotoDao photoDao;
     @Autowired TeacherDao teacherDao;
 
-    
     @Transactional
     @Override
     public void add(Teacher teacher) {
@@ -50,7 +49,6 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher get(int no) {
         return teacherDao.findByNo(no);
     }
-    
     
     @Transactional
     @Override

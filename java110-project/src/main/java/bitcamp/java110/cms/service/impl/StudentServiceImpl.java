@@ -20,7 +20,6 @@ public class StudentServiceImpl implements StudentService {
     @Autowired PhotoDao photoDao;
     @Autowired StudentDao studentDao;
     
-    
     @Transactional
     @Override
     public void add(Student student) {
