@@ -2,11 +2,10 @@ package ex08;
 
 import java.sql.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-/*  @Qualifier 사용
- * 
- */
+// @Qualifier 사용
 public class Car3 {
     private int no;
     private String model;
@@ -14,30 +13,31 @@ public class Car3 {
     private int cc;
     private Date createdDate;
     
+    @Autowired(required=false)
     @Qualifier("e2")
     private Engine engine;
-
+    
     public Car3() {
-        System.out.println("Car() has Called..");
+        System.out.println("Car() 호출됨!");
     }
-
+    
     public Car3(String model, int cc) {
         this.model = model;
         this.cc = cc;
-        System.out.println("Car(Sting, int) has Called..");
+        System.out.println("Car(String,int) 호출됨!");
     }
-
+    
     public Car3(int cc, String maker) {
         this.maker = maker;
         this.cc = cc;
-        System.out.println("Car(int, String) has Called..");
+        System.out.println("Car(int,String) 호출됨!");
     }
-
+    
     public Car3(String model, int cc, Engine engine) {
         this.model = model;
         this.cc = cc;
         this.engine = engine;
-        System.out.println("Car(Sting, int, engine) has Called..");
+        System.out.println("Car(String,int,Engine) 호출됨!");
     }
 
     public int getNo() {
@@ -79,7 +79,7 @@ public class Car3 {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
-
+    
     public Engine getEngine() {
         return engine;
     }
@@ -89,4 +89,9 @@ public class Car3 {
         return "Car [no=" + no + ", model=" + model + ", maker=" + maker + ", cc=" + cc + ", createdDate=" + createdDate
                 + ", engine=" + engine + "]";
     }
+
+    
+    
+    
+    
 }

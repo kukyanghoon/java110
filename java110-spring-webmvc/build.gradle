@@ -1,0 +1,47 @@
+
+
+plugins {
+    
+    id 'java'
+    id 'eclipse-wtp'
+    id 'war'
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+
+dependencies {
+
+    // Servlet API 라이브러리
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+
+    // JSTL 구현 라이브러리
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+
+    // SPring Web MVC 라이브러리
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.1.RELEASE'
+    
+    // json라이브러리 둘중 한개만 사용해야한다.
+    //compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+
+    // multipart/form-data를 처리할 
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
+
+    compile 'com.google.guava:guava:23.0'
+
+    testCompile 'junit:junit:4.12'
+}
+
+
+repositories {
+
+    mavenCentral();
+}

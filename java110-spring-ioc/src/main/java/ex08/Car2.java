@@ -4,10 +4,11 @@ import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-/*  Autowired 사용법.
-    1) setter에 붙이기
-    2) feild에 붙이기
- */
+// @Autowired 사용법
+// 1) setter에 붙이기
+// 2) field에 붙이기
+//    - setter가 없어도 된다.
+//
 public class Car2 {
     private int no;
     private String model;
@@ -15,30 +16,30 @@ public class Car2 {
     private int cc;
     private Date createdDate;
     
-    @Autowired(required=false)
+    @Autowired(required=false) 
     private Engine engine;
-
+    
     public Car2() {
-        System.out.println("Car() has Called..");
+        System.out.println("Car() 호출됨!");
     }
-
+    
     public Car2(String model, int cc) {
         this.model = model;
         this.cc = cc;
-        System.out.println("Car(Sting, int) has Called..");
+        System.out.println("Car(String,int) 호출됨!");
     }
-
+    
     public Car2(int cc, String maker) {
         this.maker = maker;
         this.cc = cc;
-        System.out.println("Car(int, String) has Called..");
+        System.out.println("Car(int,String) 호출됨!");
     }
-
+    
     public Car2(String model, int cc, Engine engine) {
         this.model = model;
         this.cc = cc;
         this.engine = engine;
-        System.out.println("Car(Sting, int, engine) has Called..");
+        System.out.println("Car(String,int,Engine) 호출됨!");
     }
 
     public int getNo() {
@@ -80,7 +81,7 @@ public class Car2 {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
-
+    
     public Engine getEngine() {
         return engine;
     }
@@ -90,4 +91,9 @@ public class Car2 {
         return "Car [no=" + no + ", model=" + model + ", maker=" + maker + ", cc=" + cc + ", createdDate=" + createdDate
                 + ", engine=" + engine + "]";
     }
+
+    
+    
+    
+    
 }

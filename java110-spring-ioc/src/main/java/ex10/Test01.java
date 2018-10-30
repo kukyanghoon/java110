@@ -1,6 +1,7 @@
-// Java Config
-// => XML로 설정하지 안혹 자바 클래스에서 에노테이션으로 설정하는 것을 말한다.
+// Java Config 
+// => XML로 설정하지 않고 자바 클래스에서 애노테이션으로 설정하는 것을 말한다.
 // => 요즘 많이 사용하고 있는 SpringBoot의 기본 설정 방법이다.
+//
 package ex10;
 
 import org.springframework.context.ApplicationContext;
@@ -40,8 +41,6 @@ public class Test01 {
         
         Car c4 = (Car)iocContainer.getBean("c4");
         System.out.println(c4);
-        
-        
     }
 
 }

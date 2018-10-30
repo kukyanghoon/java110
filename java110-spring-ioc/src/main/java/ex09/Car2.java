@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 // XML <bean> 태그에서 id를 생략하면 다음과 같은 이름을 갖게되지만,
 //      이름: ex08.Car2#0
 //      별명: ex08.Car2
-// @Component 에노테이션을 사용할 때는 다음과 같은 이름을 갖는다.
+// @Component 애노테이션을 사용할 때는 다음과 같은 이름을 갖는다.
 //      이름: car2
-//      
-@Component("c2")
+//
+@Component
 public class Car2 {
     private int no;
     private String model;
@@ -90,9 +90,11 @@ public class Car2 {
         return engine;
     }
 
+
     @Override
     public String toString() {
         return "Car [no=" + no + ", model=" + model + ", maker=" + maker + ", cc=" + cc + ", createdDate=" + createdDate
                 + ", engine=" + engine + "]";
     }
+
 }
