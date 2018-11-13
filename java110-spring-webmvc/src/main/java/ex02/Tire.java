@@ -1,26 +1,27 @@
 package ex02;
 
 public class Tire {
-    String naem;
+    String name;
     int radius;
-    
-    
-    
     
     @Override
     public String toString() {
-        return "Tire [naem=" + naem + ", radius=" + radius + "]";
+        return "Tire [name=" + name + ", radius=" + radius + "]";
     }
-    public Tire(String naem, int radius) {
+
+    public Tire() {}
+    
+    public Tire(String name, int radius) {
         super();
-        this.naem = naem;
+        this.name = name;
         this.radius = radius;
     }
-    public String getNaem() {
-        return naem;
+    
+    public String getName() {
+        return name;
     }
-    public void setNaem(String naem) {
-        this.naem = naem;
+    public void setName(String name) {
+        this.name = name;
     }
     public int getRadius() {
         return radius;
@@ -28,5 +29,6 @@ public class Tire {
     public void setRadius(int radius) {
         this.radius = radius;
     }
+    
     
 }

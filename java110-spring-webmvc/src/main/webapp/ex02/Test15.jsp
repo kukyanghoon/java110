@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Test14 페이지 컨트롤러</h1>
+<h1>Test15 페이지 컨트롤러</h1>
 
-
-name: ${requestScope.name}<br>
-day: ${requestScope.day}<br>
-
+name: ${name}<br>
+day: ${day}<br>
 </body>
 </html>

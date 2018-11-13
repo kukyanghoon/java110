@@ -18,6 +18,11 @@ dependencies {
     
     // JSTL 구현 라이브러리
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    // JSON 데이터를 처리하는 라이브러리
+    // => 둘 중 한 개만 사용해야한다.    
+    //compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+    
     
     // Spring IoC 컨테이너 관련 라이브러리
     //=> Spring Web MVC를 추가하면 컨텍스느 라이브러리는 자동으로 추가된다. 
@@ -43,6 +48,14 @@ dependencies {
     
     // AOP 라이브러리
     compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.2'
+    
+    //google auth
+    compile ('com.google.api-client:google-api-client:1.20.0')
+	compile ('com.google.oauth-client:google-oauth-client-jetty:1.20.0')
+	compile ('com.google.apis:google-api-services-calendar:v3-rev125-1.20.0')
+
+
+    
     
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
     compile 'com.google.guava:guava:23.0'
